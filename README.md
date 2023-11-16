@@ -5,11 +5,16 @@ Backend del proyecto propuesto en la asignatura de ASI, en este [enlace](https:/
 
 ## Primeros pasos
 
+- Instale Deno en su sistema: <https://docs.deno.com/runtime/manual/getting_started/installation>
+
+
 ```bash
-# Incluir acciones que se deben realizar para preparar el entorno de desarrollo
+# Incluir acciones a realizar
 ```
 
 ## Ejecución del proyecto
+
+- Ejecute el archivo docker-compose: ```docker compose up -d```
 
 ```bash
 # Incluir acciones a realizar para levantar el backend
