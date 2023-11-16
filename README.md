@@ -1,2 +1,16 @@
 # Backend, Hermenegildo e hijos, S.L
 ## 23/24 Análisis de Sistemas de Información
+
+Backend del proyecto propuesto en la asignatura de ASI, [Frontend](https://github.com/pablomarino/asi-herm-frontend/) 
+
+## Primeros pasos
+
+```bash
+# Incluir acciones que se deben realizar para preparar el entorno de desarrollo
+```
+
+## Ejecución del proyecto
+
+```bash
+# Incluir acciones a realizar para levantar el backend
+```
