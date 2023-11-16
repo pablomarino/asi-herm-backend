@@ -15,6 +15,7 @@ Backend del proyecto propuesto en la asignatura de ASI, en este [enlace](https:/
 ## Ejecución del proyecto
 
 - Ejecute el archivo docker-compose: ```docker compose up -d```
+- Lance el servidor web: ```deno task start```
 
 ```bash
 # Incluir acciones a realizar para levantar el backend
