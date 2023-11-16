@@ -1,4 +1,16 @@
-# ics-herm-backend
+# Backend, Hermenegildo e hijos, S.L
+## 23/24 Análisis de Sistemas de Información
 
-- Instalación de deno desde el repositorio de paquetes.
+Backend del proyecto propuesto en la asignatura de ASI, en este [enlace](https://github.com/pablomarino/asi-herm-frontend/) puedes encontrar el repositorio del Frontend del proyecto
 
+## Primeros pasos
+
+```bash
+# Incluir acciones que se deben realizar para preparar el entorno de desarrollo
+```
+
+## Ejecución del proyecto
+
+```bash
+# Incluir acciones a realizar para levantar el backend
+```
