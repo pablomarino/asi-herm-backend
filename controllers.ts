@@ -1,11 +1,33 @@
 import { MongoClient } from "https://deno.land/x/mongo@v0.32.0/mod.ts";
 
-interface Quote {
-    _id: { $oid: string };
-    quote: string;
-    quoteID: string;
-    author: string;
-  }  
+interface Item {
+  _id: { $oid: string };
+  name: string;
+  reference: string;
+  description: string;
+  purchasePrice: number;
+  salePrice: number;
+}
+
+interface Box {
+  _id: { $oid: string };
+  size: string;
+  location: string;
+  itemId: { $oid: string }; // Referencia a Item
+}
+
+interface OrderItem {
+  itemId: { $oid: string }; // Referencia a Item
+  numberItems: number; // Cantidad de items
+}
+
+interface Order {
+  _id: { $oid: string };
+  reference: string;
+  date: Date;
+  state: string;
+  items: OrderItem[]; // Array de OrderItem
+}
 
 const URI = "mongodb://127.0.0.1:27017";
 
@@ -17,59 +39,22 @@ try {
 } catch (err) {
   console.log(err);
 }
+const db = client.database("App");
 
-const db = client.database("quotesApp"); 
-const quotes = db.collection<Quote>("quotes");
+const items = db.collection<Item>("items");
 
-// DESC: ADD single quote
-// METHOD: POST /api/quote
-const addQuote = async ({
-  request,
-  response,
-}: {
-  request: any;
-  response: any;
-}) => {
+// DESC: GET all Items
+// METHOD GET /api/items
+const getItems = async ({ response }: { response: any }) => {
   try {
-    // If the request has no Body, it will return a 404
-    if (!request.hasBody) { 
-      response.status = 400;
-      response.body = {
-        success: false,
-        msg: "No Data",
-      };
-    } else {
-      // Otherwise, it will try to insert 
-      // a quote in the DB and respond with 201
-      const body = await request.body();
-      const quote = await body.value;
-      await quotes.insertOne(quote);
-      response.status = 201;
-      response.body = {
-        success: true,
-        data: quote,
-      };
-    }
-  } catch (err) {
-    response.body = {
-      success: false,
-      msg: err.toString(),
-    };
-  }
-};
-
-// DESC: GET all Quotes
-// METHOD GET /api/quote
-const getQuotes = async ({ response }: { response: any }) => {
-  try {
-    // Find all quotes and convert them into an Array
-    const allQuotes = await quotes.find({}).toArray();
-    console.log(allQuotes);
-    if (allQuotes) {
+    // Find all items and convert them into an Array
+    const allItems = await items.find({}).toArray();
+    console.log(allItems);
+    if (allItems) {
       response.status = 200;
       response.body = {
         success: true,
-        data: allQuotes,
+        data: allItems,
       };
     } else {
       response.status = 500;
@@ -86,6 +71,148 @@ const getQuotes = async ({ response }: { response: any }) => {
   }
 };
 
-export { getQuotes, addQuote };
+// DESC: GET single item
+// METHOD: GET /api/items/:id
+const getItem = async ({
+  params,
+  response,
+}: {
+  params: { id: string };
+  response: any;
+}) => {
+  // Searches for a particular item in the DB
+  const item = await items.findOne({ reference: params.id });
+  // If found, respond with the item. If not, respond with a 404
+  if (item) {
+    response.status = 200;
+    response.body = {
+      success: true,
+      data: item,
+    };
+  } else {
+    response.status = 404;
+    response.body = {
+      success: false,
+      msg: "No item found",
+    };
+  }
+};
 
+// DESC: ADD single item
+// METHOD: POST /api/items
+const addItem = async ({
+  request,
+  response,
+}: {
+  request: any;
+  response: any;
+}) => {
+  try {
+    // If the request has no Body, it will return a 400
+    if (!request.hasBody) {
+      response.status = 400;
+      response.body = {
+        success: false,
+        msg: "No Data",
+      };
+    } else {
+      // Otherwise, it will try to insert
+      // a item in the DB and respond with 201
+      const body = await request.body();
+      const item = await body.value;
 
+      const exists = await items.findOne({ reference: item.reference });
+      if (exists) {
+        response.status = 400;
+        response.body = {
+          success: false,
+          msg: "Item with the same reference already exists",
+        };
+      } else {
+        await items.insertOne(item);
+        response.status = 201;
+        response.body = {
+          success: true,
+          data: item,
+        };
+      }
+    }
+  } catch (err) {
+    response.body = {
+      success: false,
+      msg: err.toString(),
+    };
+  }
+};
+
+// DESC: UPDATE single item
+// METHOD: PUT /api/item/:id
+const updateItem = async ({
+  params,
+  request,
+  response,
+}: {
+  params: { id: string };
+  request: any;
+  response: any;
+}) => {
+  try {
+    // Search a item in the DB and update with given values if found
+    const body = await request.body();
+    const inputItem = await body.value;
+    await items.updateOne(
+      { reference: params.id },
+      {
+        $set: {
+          name: inputItem.name,
+          description: inputItem.description,
+          purchasePrice: inputItem.purchasePrice,
+          salePrice: inputItem.salePrice,
+        },
+      }
+    );
+    // Respond with the Updated Item
+    const updatedItem = await items.findOne({ reference: params.id });
+    response.status = 200;
+    response.body = {
+      success: true,
+      data: updatedItem,
+    };
+  } catch (err) {
+    response.body = {
+      success: false,
+      msg: err.toString(),
+    };
+  }
+};
+
+// DESC: DELETE single item
+// METHOD: DELETE /api/items/:id
+const deleteItem = async ({
+  params,
+  response,
+}: {
+  params: { id: string };
+  request: any;
+  response: any;
+}) => {
+  try {
+    // Search for the given item and drop it from the DB
+    await items.deleteOne({ reference: params.id });
+    response.status = 201;
+    response.body = {
+      success: true,
+      msg: "Item deleted",
+    };
+  } catch (err) {
+    response.body = {
+      success: false,
+      msg: err.toString(),
+    };
+  }
+};
+
+export { getItems, getItem, addItem, updateItem, deleteItem };
+
+// const boxes = db.collection<Box>("boxes");
+// const orders = db.collection<Order>("orders");
