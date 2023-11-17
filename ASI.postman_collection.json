@@ -1,0 +1,370 @@
+{
+	"info": {
+		"_postman_id": "2d82f10f-748b-4fb2-8dba-5258e2e9b2e0",
+		"name": "ASI",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "31229418"
+	},
+	"item": [
+		{
+			"name": "ITEMS",
+			"item": [
+				{
+					"name": "GET ALL ITEMS",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/items",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"items"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET ITEM BY REFERENCE",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/items/1",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"items",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ADD ITEM",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"pieza 01\",\n    \"reference\": \"1\",\n    \"description\": \"pieza de prueba\",\n    \"purchasePrice\": 50.20,\n    \"salePrice\": 120\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/items",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"items"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UPDATE ITEM BY REFERENCE",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"pieza 02\",\n    \"description\": \"pieza de prueba modificada\",\n    \"purchasePrice\": 50.21,\n    \"salePrice\": 121\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/items/1",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"items",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE ITEM BY REFERENCE",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/items/1",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"items",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "BOXES",
+			"item": [
+				{
+					"name": "GET ALL BOXES",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/boxes",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"boxes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET BOX BY REFERENCE",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/boxes/1",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"boxes",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ADD BOX",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"reference\": \"2\",\n    \"size\": \"120x120x5\",\n    \"location\": \"E20-F06\",\n    \"itemReference\": \"1\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/boxes",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"boxes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UPDATE BOX BY REFERENCE",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"size\": \"120x120x5\",\n    \"location\": \"E20-F06\",\n    \"itemReference\": \"2\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/boxes/1",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"boxes",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE BOX BY REFERENCE",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/boxes/2",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"boxes",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "ORDERS",
+			"item": [
+				{
+					"name": "GET ALL ORDERS",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/orders",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"orders"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET ORDER BY REFERENCE",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/orders/1",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"orders",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ADD ORDER",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"reference\": \"3\",\n    \"date\": \"17-11-2023\",\n    \"state\": \"PENDING\",\n    \"items\": [\n        {\n            \"itemReference\": \"4\",\n            \"numberItems\": 40\n        }\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/orders",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"orders"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UPDATE ORDER BY REFERENCE",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"date\": \"12-11-2023\",\n    \"state\": \"PENDING\",\n    \"items\": [\n        {\n            \"itemReference\": \"1\",\n            \"numberItems\": 50\n        }\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/orders/1",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"orders",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE ORDER BY REFERENCE",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/orders/2",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"orders",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "host",
+			"value": "localhost:4000/api",
+			"type": "string"
+		}
+	]
+}
