@@ -1,21 +1,25 @@
-import { Router } from "https://deno.land/x/oak/mod.ts";
+import { Router } from "https://deno.land/x/oak@v12.6.1/mod.ts";
 import {
   getItems,
   getItem,
   addItem,
   updateItem,
   deleteItem,
-  getBoxes,
-  getBox,
-  addBox,
-  updateBox,
-  deleteBox,
+} from "./controllers/items.ts";
+import {
   getOrders,
   getOrder,
   addOrder,
   updateOrder,
   deleteOrder,
-} from "./controllers.ts";
+} from "./controllers/orders.ts";
+import {
+  getBoxes,
+  getBox,
+  addBox,
+  updateBox,
+  deleteBox,
+} from "./controllers/boxes.ts";
 
 const router = new Router();
 
