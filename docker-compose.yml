@@ -6,5 +6,11 @@ services:
       - "27017:27017"
     volumes:
       - mongodb_data:/data/db
+  app:
+    image: xaimepardalc/asi-herm-deno-app
+    depends_on:
+      - mongodb
+    ports:
+      - "4000:4000"
 volumes:
   mongodb_data:
