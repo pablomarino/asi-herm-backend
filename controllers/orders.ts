@@ -7,7 +7,6 @@ const getOrders = async ({ response }: { response: any }) => {
   try {
     // Find all orders and convert them into an Array
     const allOrders = await orders.find({}).toArray();
-    console.log(allOrders);
     if (allOrders) {
       response.status = 200;
       response.body = {

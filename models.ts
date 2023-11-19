@@ -13,6 +13,7 @@ export interface Box {
   size: string;
   location: string;
   itemReference: string; // Referencia a Item
+  numItems: number;
 }
 
 export interface OrderItem {

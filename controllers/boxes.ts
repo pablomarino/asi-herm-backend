@@ -1,28 +1,36 @@
+import { Context } from "https://deno.land/x/oak@v12.6.1/mod.ts";
 import { boxes, items } from "./../database.ts";
-import { Box } from "./../models.ts"
+import { Box } from "./../models.ts";
 
-// DESC: GET all Boxes
-// METHOD GET /api/boxes
-const getBoxes = async ({ response }: { response: any }) => {
+// DESC: GET all Boxes | filter by referenceItem
+// METHOD GET /api/boxes | GET /api/boxes?referenceItem="{{referenceItem}}"
+const getBoxes = async (ctx: Context) => {
   try {
-    // Find all boxes and convert them into an Array
-    const allBoxes = await boxes.find({}).toArray();
-    console.log(allBoxes);
+    const itemReference = ctx.request.url.searchParams.get("itemReference");
+
+    let query = {};
+    if (itemReference) {
+      // Si itemReference está presente, lo usamos para filtrar
+      query = { itemReference };
+    }
+
+    // Encuentra las cajas basadas en el query
+    const allBoxes = await boxes.find(query).toArray();
     if (allBoxes) {
-      response.status = 200;
-      response.body = {
+      ctx.response.status = 200;
+      ctx.response.body = {
         success: true,
         data: allBoxes,
       };
     } else {
-      response.status = 500;
-      response.body = {
+      ctx.response.status = 500;
+      ctx.response.body = {
         success: false,
         msg: "Internal Server Error",
       };
     }
   } catch (err) {
-    response.body = {
+    ctx.response.body = {
       success: false,
       msg: err.toString(),
     };

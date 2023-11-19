@@ -1,4 +1,29 @@
-import { items } from "./../database.ts";
+import { items, boxes } from "./../database.ts";
+import { Item } from "../models.ts";
+
+async function addNumItemsToItems(items: Item[]): Promise<Item[]> {
+  async function getNumItems(item: Item) {
+    const boxesFromItem = await boxes
+      .find({ itemReference: item.reference })
+      .toArray();
+    const totalNumItems = boxesFromItem.reduce((total, box) => {
+      return total + (box.numItems || 0);
+    }, 0);
+    return totalNumItems;
+  }
+
+  const itemsWithCount = await Promise.all(
+    items.map(async (item) => {
+      const numTotalItems = await getNumItems(item);
+      return {
+        ...item,
+        numTotalItems,
+      };
+    })
+  );
+
+  return itemsWithCount;
+}
 
 // DESC: GET all Items
 // METHOD GET /api/items
@@ -6,12 +31,11 @@ const getItems = async ({ response }: { response: any }) => {
   try {
     // Find all items and convert them into an Array
     const allItems = await items.find({}).toArray();
-    console.log(allItems);
     if (allItems) {
       response.status = 200;
       response.body = {
         success: true,
-        data: allItems,
+        data: await addNumItemsToItems(allItems),
       };
     } else {
       response.status = 500;
@@ -44,7 +68,7 @@ const getItem = async ({
     response.status = 200;
     response.body = {
       success: true,
-      data: item,
+      data: (await addNumItemsToItems([item]))[0],
     };
   } else {
     response.status = 404;
