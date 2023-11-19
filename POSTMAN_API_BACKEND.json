@@ -156,13 +156,36 @@
 					"response": []
 				},
 				{
+					"name": "GET BOXES BY ITEM",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/boxes?itemReference=0",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"boxes"
+							],
+							"query": [
+								{
+									"key": "itemReference",
+									"value": "0"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "ADD BOX",
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"reference\": \"2\",\n    \"size\": \"120x120x5\",\n    \"location\": \"E20-F06\",\n    \"itemReference\": \"1\"\n}",
+							"raw": "{\n    \"reference\": \"2\",\n    \"size\": \"120x120x5\",\n    \"location\": \"E20-F06\",\n    \"itemReference\": \"1\",\n    \"numItems\": 50\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -188,7 +211,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"size\": \"120x120x5\",\n    \"location\": \"E20-F06\",\n    \"itemReference\": \"2\"\n}",
+							"raw": "{\n    \"size\": \"120x120x5\",\n    \"location\": \"E20-F06\",\n    \"itemReference\": \"2\",\n    \"numItems\": 40\n}",
 							"options": {
 								"raw": {
 									"language": "json"
