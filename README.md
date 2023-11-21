@@ -3,20 +3,12 @@
 
 Backend del proyecto propuesto en la asignatura de ASI, en este [enlace](https://github.com/pablomarino/asi-herm-frontend/) puedes encontrar el repositorio del Frontend del proyecto
 
-## Primeros pasos
-
-- Instale Deno en su sistema: <https://docs.deno.com/runtime/manual/getting_started/installation>
-
-
-```bash
-# Incluir acciones a realizar
-```
-
-## Ejecución del proyecto
+## Ejecución del proyecto (backend + BD)
 
 - Ejecute el archivo docker-compose: ```docker compose up -d```
-- Lance el servidor web: ```deno task start```
 
-```bash
-# Incluir acciones a realizar para levantar el backend
-```
+
+## Desarrollo del proyecto
+
+- Instale Deno en su sistema: <https://docs.deno.com/runtime/manual/getting_started/installation>
+- Lance el proyecto de deno ```deno task start```
