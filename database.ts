@@ -1,8 +1,12 @@
 import { MongoClient } from "https://deno.land/x/mongo@v0.32.0/mod.ts";
 import { Item, Box, Order } from "./models.ts"
 
-const URI = "mongodb://127.0.0.1:27017";
+const mongoHost = Deno.env.get("MONGO_HOST") || "0.0.0.0";
+const mongoPort = Deno.env.get("MONGO_PORT") || "27017";
 
+const URI = `mongodb://${mongoHost}:${mongoPort}`;
+
+console.log(`MONGO: ${URI}`)
 // Mongo Connection Init
 const client = new MongoClient();
 try {

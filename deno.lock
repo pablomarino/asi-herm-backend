@@ -2,6 +2,7 @@
   "version": "3",
   "redirects": {
     "https://deno.land/x/bytes_formater/mod.ts": "https://deno.land/x/bytes_formater@v1.4.0/mod.ts",
+    "https://deno.land/x/dotenv/mod.ts": "https://deno.land/x/dotenv@v3.2.2/mod.ts",
     "https://deno.land/x/oak/mod.ts": "https://deno.land/x/oak@v12.6.1/mod.ts"
   },
   "remote": {
@@ -186,6 +187,8 @@
     "https://deno.land/x/bytes_formater@v1.4.0/deps.ts": "4f98f74e21145423b873a5ca6ead66dc3e674fa81e230a0a395f9b86aafeceea",
     "https://deno.land/x/bytes_formater@v1.4.0/format.ts": "657c41b9f180c3ed0f934dcf75f77b09b6a610be98bb07525bffe2acfd5af4d5",
     "https://deno.land/x/bytes_formater@v1.4.0/mod.ts": "c6bf35303f53d74e9134eb13f666fb388fb4c62c6b12b17542bbadade250a864",
+    "https://deno.land/x/dotenv@v3.2.2/mod.ts": "077b48773de9205266a0b44c3c3a3c3083449ed64bb0b6cc461b95720678d38e",
+    "https://deno.land/x/dotenv@v3.2.2/util.ts": "693730877b13f8ead2b79b2aa31e2a0652862f7dc0c5f6d2f313f4d39c7b7670",
     "https://deno.land/x/mongo@v0.22.0/bson/mod.ts": "4cfbe6273e120e74e75dacf5a6ee5eee360fa900ceee9240892cd8e03f160ebf",
     "https://deno.land/x/mongo@v0.22.0/deps.ts": "64735636cf6e9981c7df47bf5676d9965a98474ca8365a984b575f63cd790113",
     "https://deno.land/x/mongo@v0.22.0/mod.ts": "73e92d8acf2ccd7caebb6cdf2202545461daba6d0e781c6095d3eb1964f52f71",
