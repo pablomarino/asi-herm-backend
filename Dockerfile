@@ -6,4 +6,4 @@ COPY . ./
 
 EXPOSE 4000
 
-CMD ["run", "--allow-all", "server.ts"]
+CMD ["deno", "task", "start"]
