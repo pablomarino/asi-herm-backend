@@ -7,7 +7,7 @@ services:
     volumes:
       - mongodb_data:/data/db
   app:
-    image: xaimepardalc/asi-herm-deno-app:2.1
+    image: xaimepardalc/asi-herm-deno-app:2.2
     depends_on:
       - mongo
     ports:

@@ -1,5 +1,33 @@
 import { orders, items } from "./../database.ts";
-import { Order, OrderItem } from "./../models.ts";
+import { Order, OrderItem, Item } from "./../models.ts";
+
+async function calculateOrderTotal(order: Order): Promise<number> {
+  let total = 0;
+
+  for (const orderItem of order.items) {
+    const item = await items.findOne({ reference: orderItem.itemReference });
+    if (item) {
+      total += item.salePrice * orderItem.numberItems;
+    } else {
+      throw new Error(`Item not found: ${orderItem.itemReference}`);
+    }
+  }
+
+  return total;
+}
+
+async function calculateAllOrdersTotal(orders: Order[]): Promise<Order[]> {
+  const ordersWithPrice = await Promise.all(
+    orders.map(async (order) => {
+      const price = await calculateOrderTotal(order);
+      return {
+        ...order,
+        price,
+      };
+    })
+  );
+  return ordersWithPrice;
+}
 
 // DESC: GET all Orders
 // METHOD GET /api/orders
@@ -11,7 +39,7 @@ const getOrders = async ({ response }: { response: any }) => {
       response.status = 200;
       response.body = {
         success: true,
-        data: allOrders,
+        data: (await calculateAllOrdersTotal(allOrders)),
       };
     } else {
       response.status = 500;
@@ -44,7 +72,7 @@ const getOrder = async ({
     response.status = 200;
     response.body = {
       success: true,
-      data: order,
+      data:  (await calculateAllOrdersTotal([order]))[0],
     };
   } else {
     response.status = 404;
