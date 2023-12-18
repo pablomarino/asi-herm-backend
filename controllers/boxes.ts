@@ -151,6 +151,7 @@ const updateBox = async ({
             size: inputBox.size,
             location: inputBox.location,
             itemReference: inputBox.itemReference,
+            numItems: inputBox.numItems
           },
         }
       );
