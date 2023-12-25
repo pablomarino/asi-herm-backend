@@ -17,6 +17,8 @@ services:
       - MONGO_PORT=27017
   app:
     image: xaimepardalc/asi-frontend:1.0
+    volumes:
+      - ./init-mongo.sh:/etc/init.d/init-script.sh
     depends_on:
       - mongo
     ports:
