@@ -1,6 +1,6 @@
 #!/bin/bash
 
-HOST="localhost:27017/api"
+HOST="localhost:4000/api"
 
 send_request() {
   local method="$1"
