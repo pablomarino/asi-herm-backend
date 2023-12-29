@@ -21,6 +21,10 @@ import {
   deleteBox,
 } from "./controllers/boxes.ts";
 
+import {
+  check
+} from "./controllers/check.ts"
+
 const router = new Router();
 
 router
@@ -40,6 +44,8 @@ router
   .get("/api/orders/:id", getOrder)
   .post("/api/orders", addOrder)
   .put("/api/orders/:id", updateOrder)
-  .delete("/api/orders/:id", deleteOrder);
+  .delete("/api/orders/:id", deleteOrder)
+
+  .get("/healhz", check);
 
 export default router;
