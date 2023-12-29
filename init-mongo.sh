@@ -58,8 +58,7 @@ send_request "POST" "orders" '{
     {
       "itemReference": "2",
       "numberItems": 20
-    },
-    
+    }
   ]
 }'
 
